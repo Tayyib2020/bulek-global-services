@@ -1,0 +1,4 @@
+import React from 'react';
+import {gallery} from '../data/siteContent.js';
+import {Photo,SectionTitle} from './Header.jsx';
+export default function Gallery(){return <section id="gallery" className="section"><div className="container"><SectionTitle label="GALLERY">Illustrative Properties</SectionTitle><p className="section-intro">A glimpse of residential architecture, land, and developments representative of the Nigerian real estate market.</p><p className="gallery-context">AI-generated architectural illustrations, presented for inspiration.</p><div className="gallery-grid">{gallery.map(([image,title,alt])=><figure key={image}><Photo name={image} alt={alt}/><figcaption>{title}</figcaption></figure>)}</div><p className="disclaimer">Images are for illustrative purposes only and do not represent properties currently offered for sale by Bulek Global Services Ltd.</p></div></section>}

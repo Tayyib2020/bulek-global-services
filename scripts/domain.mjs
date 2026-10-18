@@ -1,0 +1,7 @@
+import {readFile,writeFile,rm} from 'node:fs/promises';
+const domain=process.env.SITE_URL?.trim();
+let html=await readFile('index.html','utf8');
+html=html.replace(/<!-- production-domain-metadata -->[\s\S]*?<!-- \/production-domain-metadata -->/,'<!-- production-domain-metadata -->');
+let robots='User-agent: *\nAllow: /\n';
+if(domain){const url=new URL(domain);if(url.protocol!=='https:'||url.pathname!=='/'||url.search||url.hash||url.username||url.password)throw new Error('SITE_URL must be an HTTPS origin without a path or credentials');const origin=url.origin;html=html.replace('<!-- production-domain-metadata -->',`<!-- production-domain-metadata --><link rel="canonical" href="${origin}/"/><meta property="og:url" content="${origin}/"/><meta property="og:image" content="${origin}/images/modern.webp"/><meta property="og:image:alt" content="Illustrative contemporary residential architecture"/><!-- /production-domain-metadata -->`);await writeFile('public/sitemap.xml',`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${origin}/</loc></url></urlset>`);robots+=`Sitemap: ${origin}/sitemap.xml\n`;}else{await rm('public/sitemap.xml',{force:true});console.log('SITE_URL unset: canonical, absolute OG image and sitemap deferred until a domain is selected.');}
+await writeFile('index.html',html);await writeFile('public/robots.txt',robots);

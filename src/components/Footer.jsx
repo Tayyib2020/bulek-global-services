@@ -1,0 +1,4 @@
+import React from 'react';
+import {company,navigation} from '../data/siteContent.js';
+import {Icon,Logo} from './Header.jsx';
+export default function Footer(){return <footer><div className="container"><div className="footer-top"><div className="footer-brand"><a href="#home" aria-label={`${company.name} — Home`}><Logo/></a><div><p>{company.name}</p><p>{company.description}</p></div></div><nav aria-label="Footer navigation">{navigation.map(([id,label])=><a key={id} href={`#${id}`}>{label}</a>)}</nav></div><div className="footer-bottom"><p>© {new Date().getFullYear()} {company.name}. All rights reserved.</p><a className="phone-link" href={company.phoneUrl} aria-label={`Call Bulek Global Services Ltd on ${company.phone}`}><Icon type="phone"/>{company.phone}</a><a href={`mailto:${company.email}`}>{company.email}</a></div></div></footer>}

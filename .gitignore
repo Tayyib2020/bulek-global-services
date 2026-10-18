@@ -1,0 +1,35 @@
+# Dependencies and generated output
+node_modules/
+dist/
+coverage/
+.vite/
+.cache/
+.eslintcache
+*.tsbuildinfo
+
+# Environment files and local credentials
+.env
+.env.*
+!.env.example
+*.local
+.npmrc
+*.pem
+*.key
+*.p12
+*.pfx
+.vercel/
+
+# Logs, editor and operating-system files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local QA screenshots (website assets live under public/)
+/*-preview.png

@@ -1,0 +1,8 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile,stat} from 'node:fs/promises';
+import {company,enquiryUrl,navigation,gallery,services} from '../src/data/siteContent.js';
+test('verified contact destinations and enquiry message',()=>{assert.equal(company.phoneUrl,'tel:+2349032325595');assert.equal(company.whatsappUrl,'https://wa.me/2348022776877');assert.equal(company.email,'bulekglobalservices@gmail.com');assert.equal(new URL(enquiryUrl).searchParams.get('text'),'I would like to enquire about your property sales and consultancy services');assert.equal(enquiryUrl,'https://wa.me/2348022776877?text=I%20would%20like%20to%20enquire%20about%20your%20property%20sales%20and%20consultancy%20services');});
+test('all navigation targets exist',async()=>{const source=(await Promise.all(['Hero','About','Services','Gallery','Contact'].map(n=>readFile(`src/components/${n}.jsx`,'utf8')))).join('');for(const [id] of navigation)assert.ok(source.includes(`id="${id}"`));});
+test('six distinct local gallery assets and service images exist',async()=>{assert.equal(gallery.length,6);assert.equal(new Set(gallery.map(x=>x[0])).size,6);assert.ok(gallery.every(([name,,alt])=>name.startsWith('gallery-')&&alt.startsWith('AI-generated illustration')));assert.equal(services.find(s=>s.title==='Land Sales').image,'land-sales');for(const name of new Set([...gallery.map(x=>x[0]),...services.map(x=>x.image)])){assert.ok((await stat(`public/images/${name}.webp`)).size>1000)}});
+test('required disclosure is rendered',async()=>{assert.match(await readFile('src/components/Gallery.jsx','utf8'),/Images are for illustrative purposes only and do not represent properties currently offered for sale by Bulek Global Services Ltd\./);});
