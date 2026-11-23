@@ -1,4 +1,4 @@
-export const company = { name:'Bulek Global Services Ltd', description:'Real Estate Sales & Consultancy', phone:'09032325595', phoneUrl:'tel:+2349032325595', whatsapp:'08022776877', whatsappUrl:'https://wa.me/2348022776877', email:'bulekglobalservices@gmail.com', address:'Plot F13, Funtaj Road, Kango, Kuje, FCT, Nigeria.' };
+export const company = { name:'Bulek Global Services Ltd', description:'Real Estate Sales & Consultancy', phone:'08110704214', phoneUrl:'tel:+2348110704214', whatsapp:'08022776877', whatsappUrl:'https://wa.me/2348022776877', email:'bulekglobalservices@gmail.com', address:'Plot F13, Funtaj Road, Kango, Kuje, FCT, Nigeria.' };
 export const enquiryUrl = `${company.whatsappUrl}?text=${encodeURIComponent('I would like to enquire about your property sales and consultancy services')}`;
 export const navigation = [['home','Home'],['about','About Us'],['services','Our Services'],['gallery','Gallery'],['contact','Contact']];
 export const services = [
